@@ -90,16 +90,14 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-path="frontend/src/app/page.tsx" id="el_1e33d9c2">
-
-              <Link href="/demo" className="rounded-xl shadow-lg max-h-[400px] object-cover selected-element" data-path="frontend/src/app/page.tsx" id="el_3428f272" src="https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center" data-path="frontend/src/app/page.tsx" id="el_1e33d9c2"><Link href="/customer/fb6fd883-5dd3-43cf-8486-7d4a91688051/demo/" className="rounded-xl shadow-lg max-h-[400px] object-cover selected-element" data-path="frontend/src/app/page.tsx" id="el_3428f272" src="https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                 Request Demo
               </Link>
 
-              <Link href="/features" className="rounded-xl shadow-lg max-h-[400px] object-cover selected-element" data-path="frontend/src/app/page.tsx" id="el_2e21a8a0" src="https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+            <Link href="/features" className="rounded-xl shadow-lg max-h-[400px] object-cover selected-element" data-path="frontend/src/app/page.tsx" id="el_2e21a8a0" src="https://images.unsplash.com/photo-1624555130581-1d9cca783bc0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
                 Learn More
               </Link>
-            </div>
+          </div>
 
             <div className="mt-8" data-path="frontend/src/app/page.tsx" id="el_627a8a7c"><img src="https://plus.unsplash.com/premium_photo-1683865776032-07bf70b0add1?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="EduAdmin dashboard showing school management features" className="rounded-xl shadow-lg max-h-[400px] object-cover selected-element" data-path="frontend/src/app/page.tsx" id="el_4045dd0e" />
           </div>
