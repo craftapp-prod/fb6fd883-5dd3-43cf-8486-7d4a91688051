@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FiBookOpen, FiCalendar, FiUsers, FiBarChart2, FiMessageSquare, FiDollarSign, FiFileText, FiSettings, FiBell, FiBook, FiUserCheck, FiClock, FiAward } from "react-icons/fi";
+import { FiBookOpen, FiCalendar, FiUsers, FiBarChart2, FiMessageSquare, FiDollarSign, FiFileText, FiSettings, FiBell, FiBook, FiUserCheck, FiClock, FiAward } from "react-icons/fi";import "./page.css";
 
 const features = [
 {
