@@ -1,4 +1,4 @@
-import "./globals.css";
+import { PathTracker } from "@/utils/pathTracker";import { DragAndDrop } from "@/utils/dragAndDrop";import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { AuthProvider } from "@/hooks/useAuth";
@@ -37,6 +37,8 @@ export default function RootLayout({
           <Footer />
         </AuthProvider>
       </body>
-    </html>);
+    
+  <DragAndDrop />
 
-}
+  <PathTracker />
+    </html>);}
