@@ -5,8 +5,8 @@ import React, {
   useEffect,
   createContext,
   useContext,
-  ReactNode,
-} from "react";
+  ReactNode } from
+"react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import { getToken, setToken, removeToken } from "@/lib/utils";
@@ -16,8 +16,8 @@ import {
   RegisterData,
   ActivationData,
   User,
-  UserUpdateData,
-} from "@/types";
+  UserUpdateData } from
+"@/types";
 
 interface AuthContextType extends AuthState {
   login: (data: LoginData) => Promise<boolean>;
@@ -32,7 +32,7 @@ const defaultAuthState: AuthState = {
   token: null,
   isAuthenticated: false,
   isLoading: true,
-  error: null,
+  error: null
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -41,10 +41,10 @@ const AuthContext = createContext<AuthContextType>({
   register: async () => false,
   activate: async () => false,
   updateAccount: async () => false,
-  logout: () => {},
+  logout: () => {}
 });
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({ children }: {children: ReactNode;}) => {
   const [state, setState] = useState<AuthState>(defaultAuthState);
   const router = useRouter();
 
@@ -62,26 +62,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
               token,
               isAuthenticated: true,
               isLoading: false,
-              error: null,
+              error: null
             });
           } else {
             removeToken();
             setState({
               ...defaultAuthState,
-              isLoading: false,
+              isLoading: false
             });
           }
         } catch (error) {
           removeToken();
           setState({
             ...defaultAuthState,
-            isLoading: false,
+            isLoading: false
           });
         }
       } else {
         setState({
           ...defaultAuthState,
-          isLoading: false,
+          isLoading: false
         });
       }
     };
@@ -106,14 +106,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           token: access_token,
           isAuthenticated: true,
           isLoading: false,
-          error: null,
+          error: null
         });
         return true;
       } else {
         setState({
           ...defaultAuthState,
           isLoading: false,
-          error: userResponse.error || "Failed to fetch user data",
+          error: userResponse.error || "Failed to fetch user data"
         });
         return false;
       }
@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState({
         ...defaultAuthState,
         isLoading: false,
-        error: response.error || "Login failed",
+        error: response.error || "Login failed"
       });
       return false;
     }
@@ -135,14 +135,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (response.data) {
       setState({
         ...defaultAuthState,
-        isLoading: false,
+        isLoading: false
       });
       return true;
     } else {
       setState({
         ...defaultAuthState,
         isLoading: false,
-        error: response.error || "Registration failed",
+        error: response.error || "Registration failed"
       });
       return false;
     }
@@ -156,14 +156,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (response.data) {
       setState({
         ...defaultAuthState,
-        isLoading: false,
+        isLoading: false
       });
       return true;
     } else {
       setState({
         ...defaultAuthState,
         isLoading: false,
-        error: response.error || "Account activation failed",
+        error: response.error || "Account activation failed"
       });
       return false;
     }
@@ -176,7 +176,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        error: "You must be logged in to update your account",
+        error: "You must be logged in to update your account"
       }));
       return false;
     }
@@ -190,14 +190,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         isLoading: false,
         error: null,
         token: prev.token,
-        isAuthenticated: prev.isAuthenticated,
+        isAuthenticated: prev.isAuthenticated
       }));
       return true;
     } else {
       setState((prev) => ({
         ...prev,
         isLoading: false,
-        error: response.error || "Failed to update account",
+        error: response.error || "Failed to update account"
       }));
       return false;
     }
@@ -207,7 +207,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     removeToken();
     setState({
       ...defaultAuthState,
-      isLoading: false,
+      isLoading: false
     });
     router.push("/");
   };
@@ -218,7 +218,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     register,
     activate,
     updateAccount,
-    logout,
+    logout
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
