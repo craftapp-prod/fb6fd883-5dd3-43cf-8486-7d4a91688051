@@ -102,7 +102,7 @@ const Header = () => {
                 </Link>
               </>}
 
-          <a id="el_50f15462" className="flex items-center bg-primary-600 text-white hover:bg-primary-700 px-4 py-2 rounded-md text-sm font-medium transition selected-element" data-path="frontend/src/components/layout/Header.tsx" data-page="frontend/src/app/page.tsx" href="/customer/fb6fd883-5dd3-43cf-8486-7d4a91688051/register/">Register1</a>
+         
         </div>
         </div>
       </div>
