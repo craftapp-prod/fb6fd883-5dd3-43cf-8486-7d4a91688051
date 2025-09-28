@@ -6,8 +6,8 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState } from
-'react';
+  useState,
+} from 'react';
 
 interface Pos {
   element: HTMLElement;
@@ -26,17 +26,17 @@ interface Position {
   id: string;
 }
 const GENERIC_CONTAINERS = [
-'div',
-'section',
-'article',
-'main',
-'aside',
-'header',
-'footer',
-'ul',
-'ol',
-'nav'];
-
+  'div',
+  'section',
+  'article',
+  'main',
+  'aside',
+  'header',
+  'footer',
+  'ul',
+  'ol',
+  'nav',
+];
 
 interface ElementAttributes {
   id: string;
@@ -73,7 +73,7 @@ export function DragAndDrop() {
   const isResizingRef = useRef(false);
   const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const lastMousePosition = useRef<{x: number;y: number;} | null>(null);
+  const lastMousePosition = useRef<{ x: number; y: number } | null>(null);
   const horizontalGuideRef = useRef<HTMLDivElement>(null);
   const verticalGuideRef = useRef<HTMLDivElement>(null);
   const centerCrosshairRef = useRef<HTMLDivElement>(null);
@@ -159,20 +159,20 @@ export function DragAndDrop() {
         top: parseFloat(activeStyles.marginTop) || 0,
         bottom: parseFloat(activeStyles.marginBottom) || 0,
         left: parseFloat(activeStyles.marginLeft) || 0,
-        right: parseFloat(activeStyles.marginRight) || 0
+        right: parseFloat(activeStyles.marginRight) || 0,
       };
       const viewport = {
         top: 0,
         left: 0,
         right: window.innerWidth,
-        bottom: window.innerHeight
+        bottom: window.innerHeight,
       };
 
       const viewportDistances = {
         top: activeRect.top - viewport.top,
         bottom: viewport.bottom - activeRect.bottom,
         left: activeRect.left - viewport.left,
-        right: viewport.right - activeRect.right
+        right: viewport.right - activeRect.right,
       };
 
       showVerticalDistance(
@@ -182,11 +182,11 @@ export function DragAndDrop() {
           bottom: viewport.top,
           left: viewport.left,
           right: viewport.right,
-          id: 'viewport-top'
+          id: 'viewport-top',
         },
         'top',
         viewportDistances.top,
-        0
+        0,
       );
 
       showVerticalDistance(
@@ -196,11 +196,11 @@ export function DragAndDrop() {
           bottom: viewport.bottom,
           left: viewport.left,
           right: viewport.right,
-          id: 'viewport-bottom'
+          id: 'viewport-bottom',
         },
         'bottom',
         viewportDistances.bottom,
-        0
+        0,
       );
 
       showHorizontalDistance(
@@ -210,11 +210,11 @@ export function DragAndDrop() {
           bottom: viewport.bottom,
           left: viewport.left,
           right: viewport.left,
-          id: 'viewport-left'
+          id: 'viewport-left',
         },
         'left',
         viewportDistances.left,
-        0
+        0,
       );
 
       showHorizontalDistance(
@@ -224,11 +224,11 @@ export function DragAndDrop() {
           bottom: viewport.bottom,
           left: viewport.right,
           right: viewport.right,
-          id: 'viewport-right'
+          id: 'viewport-right',
         },
         'right',
         viewportDistances.right,
-        0
+        0,
       );
       siblings.forEach((sibling) => {
         const siblingElement = document.getElementById(sibling.id);
@@ -239,7 +239,7 @@ export function DragAndDrop() {
           top: parseFloat(siblingStyles.marginTop) || 0,
           bottom: parseFloat(siblingStyles.marginBottom) || 0,
           left: parseFloat(siblingStyles.marginLeft) || 0,
-          right: parseFloat(siblingStyles.marginRight) || 0
+          right: parseFloat(siblingStyles.marginRight) || 0,
         };
 
         const distances = {
@@ -250,12 +250,12 @@ export function DragAndDrop() {
           topOverlap: sibling.top - activeRect.top,
           bottomOverlap: activeRect.bottom - sibling.bottom,
           leftOverlap: sibling.left - activeRect.left,
-          rightOverlap: activeRect.right - sibling.right
+          rightOverlap: activeRect.right - sibling.right,
         };
 
         const isTopAligned = Math.abs(activeRect.top - sibling.top) < 1;
         const isBottomAligned =
-        Math.abs(activeRect.bottom - sibling.bottom) < 1;
+          Math.abs(activeRect.bottom - sibling.bottom) < 1;
         const isLeftAligned = Math.abs(activeRect.left - sibling.left) < 1;
         const isRightAligned = Math.abs(activeRect.right - sibling.right) < 1;
         if (distances.topToBottom >= 0) {
@@ -264,7 +264,7 @@ export function DragAndDrop() {
             sibling,
             'top',
             distances.topToBottom,
-            activeMargin.top + siblingMargin.bottom
+            activeMargin.top + siblingMargin.bottom,
           );
         } else if (distances.bottomToTop >= 0) {
           showVerticalDistance(
@@ -272,31 +272,31 @@ export function DragAndDrop() {
             sibling,
             'bottom',
             distances.bottomToTop,
-            activeMargin.bottom + siblingMargin.top
+            activeMargin.bottom + siblingMargin.top,
           );
         } else if (
-        distances.topOverlap > 0 &&
-        distances.topOverlap < activeRect.height)
-        {
+          distances.topOverlap > 0 &&
+          distances.topOverlap < activeRect.height
+        ) {
           showVerticalDistance(
             activeRect,
             sibling,
             'top',
             distances.topOverlap,
             activeMargin.top + siblingMargin.top,
-            true
+            true,
           );
         } else if (
-        distances.bottomOverlap > 0 &&
-        distances.bottomOverlap < activeRect.height)
-        {
+          distances.bottomOverlap > 0 &&
+          distances.bottomOverlap < activeRect.height
+        ) {
           showVerticalDistance(
             activeRect,
             sibling,
             'bottom',
             distances.bottomOverlap,
             activeMargin.bottom + siblingMargin.bottom,
-            true
+            true,
           );
         }
 
@@ -306,7 +306,7 @@ export function DragAndDrop() {
             sibling,
             'left',
             distances.leftToRight,
-            activeMargin.left + siblingMargin.right
+            activeMargin.left + siblingMargin.right,
           );
         } else if (distances.rightToLeft >= 0) {
           showHorizontalDistance(
@@ -314,31 +314,31 @@ export function DragAndDrop() {
             sibling,
             'right',
             distances.rightToLeft,
-            activeMargin.right + siblingMargin.left
+            activeMargin.right + siblingMargin.left,
           );
         } else if (
-        distances.leftOverlap > 0 &&
-        distances.leftOverlap < activeRect.width)
-        {
+          distances.leftOverlap > 0 &&
+          distances.leftOverlap < activeRect.width
+        ) {
           showHorizontalDistance(
             activeRect,
             sibling,
             'left',
             distances.leftOverlap,
             activeMargin.left + siblingMargin.left,
-            true
+            true,
           );
         } else if (
-        distances.rightOverlap > 0 &&
-        distances.rightOverlap < activeRect.width)
-        {
+          distances.rightOverlap > 0 &&
+          distances.rightOverlap < activeRect.width
+        ) {
           showHorizontalDistance(
             activeRect,
             sibling,
             'right',
             distances.rightOverlap,
             activeMargin.right + siblingMargin.right,
-            true
+            true,
           );
         }
         if (isTopAligned) showAlignment(activeRect, sibling, 'top');
@@ -347,23 +347,23 @@ export function DragAndDrop() {
         if (isRightAligned) showAlignment(activeRect, sibling, 'right');
       });
     },
-    []
+    [],
   );
 
   // ========= show alignment =======
   const showAlignment = (
-  active: DOMRect,
-  sibling: Position,
-  edge: 'top' | 'bottom' | 'left' | 'right') =>
-  {
+    active: DOMRect,
+    sibling: Position,
+    edge: 'top' | 'bottom' | 'left' | 'right',
+  ) => {
     const existingHorizontal = alignmentLinesRef.current.horizontal;
     const existingVertical = alignmentLinesRef.current.vertical;
     if (edge === 'top' || edge === 'bottom') {
       const y = edge === 'top' ? active.top : active.bottom;
       if (
-      !existingHorizontal ||
-      parseFloat(existingHorizontal.style.top) !== y)
-      {
+        !existingHorizontal ||
+        parseFloat(existingHorizontal.style.top) !== y
+      ) {
         if (existingHorizontal) existingHorizontal.remove();
         const span = document.createElement('div');
         span.className = `alignment-line alignment-${edge}`;
@@ -399,13 +399,13 @@ export function DragAndDrop() {
 
   // === Show Vertical Distance (full line from element to reference) ===
   const showVerticalDistance = (
-  active: DOMRect,
-  sibling: Position,
-  edge: 'top' | 'bottom',
-  distance: number,
-  totalMargin: number,
-  isOverlap: boolean = false) =>
-  {
+    active: DOMRect,
+    sibling: Position,
+    edge: 'top' | 'bottom',
+    distance: number,
+    totalMargin: number,
+    isOverlap: boolean = false,
+  ) => {
     const span = distanceSpanRefs.current[edge];
     if (!span) return;
 
@@ -429,40 +429,40 @@ export function DragAndDrop() {
       line.style.height = '100%';
       line.style.left = '0';
       line.style.top = '0';
-      line.style.backgroundColor = isOverlap ?
-      'rgba(255, 100, 100, 0.9)' :
-      totalMargin > 0 ?
-      'rgba(0, 200, 100, 0.9)' :
-      'rgba(0, 150, 255, 0.9)';
+      line.style.backgroundColor = isOverlap
+        ? 'rgba(255, 100, 100, 0.9)'
+        : totalMargin > 0
+          ? 'rgba(0, 200, 100, 0.9)'
+          : 'rgba(0, 150, 255, 0.9)';
     }
 
     if (label) {
-      label.textContent = isOverlap ?
-      `Overlap: ${Math.round(distance)}px` :
-      `${Math.round(distance)}px${
-      totalMargin > 0 ? ` (${Math.round(totalMargin)}px)` : ''}`;
-
+      label.textContent = isOverlap
+        ? `Overlap: ${Math.round(distance)}px`
+        : `${Math.round(distance)}px${
+            totalMargin > 0 ? ` (${Math.round(totalMargin)}px)` : ''
+          }`;
 
       label.style.left = '50%';
       label.style.top = '50%';
       label.style.transform = 'translate(-50%, -50%)';
-      label.style.backgroundColor = isOverlap ?
-      'rgba(200, 50, 50, 0.9)' :
-      totalMargin > 0 ?
-      'rgba(0, 160, 80, 0.9)' :
-      'rgba(0, 100, 255, 0.9)';
+      label.style.backgroundColor = isOverlap
+        ? 'rgba(200, 50, 50, 0.9)'
+        : totalMargin > 0
+          ? 'rgba(0, 160, 80, 0.9)'
+          : 'rgba(0, 100, 255, 0.9)';
     }
   };
 
   // ======= Show Horizontal Distance (full line from element to reference) =======
   const showHorizontalDistance = (
-  active: DOMRect,
-  sibling: Position,
-  edge: 'left' | 'right',
-  distance: number,
-  totalMargin: number,
-  isOverlap: boolean = false) =>
-  {
+    active: DOMRect,
+    sibling: Position,
+    edge: 'left' | 'right',
+    distance: number,
+    totalMargin: number,
+    isOverlap: boolean = false,
+  ) => {
     const span = distanceSpanRefs.current[edge];
     if (!span) return;
 
@@ -486,28 +486,28 @@ export function DragAndDrop() {
       line.style.height = '2px';
       line.style.left = '0';
       line.style.top = '0';
-      line.style.backgroundColor = isOverlap ?
-      'rgba(255, 100, 100, 0.9)' :
-      totalMargin > 0 ?
-      'rgba(0, 200, 100, 0.9)' :
-      'rgba(0, 150, 255, 0.9)';
+      line.style.backgroundColor = isOverlap
+        ? 'rgba(255, 100, 100, 0.9)'
+        : totalMargin > 0
+          ? 'rgba(0, 200, 100, 0.9)'
+          : 'rgba(0, 150, 255, 0.9)';
     }
 
     if (label) {
-      label.textContent = isOverlap ?
-      `Overlap: ${Math.round(distance)}px` :
-      `${Math.round(distance)}px${
-      totalMargin > 0 ? ` (${Math.round(totalMargin)}px)` : ''}`;
-
+      label.textContent = isOverlap
+        ? `Overlap: ${Math.round(distance)}px`
+        : `${Math.round(distance)}px${
+            totalMargin > 0 ? ` (${Math.round(totalMargin)}px)` : ''
+          }`;
 
       label.style.left = '50%';
       label.style.top = '50%';
       label.style.transform = 'translate(-50%, -50%)';
-      label.style.backgroundColor = isOverlap ?
-      'rgba(200, 50, 50, 0.9)' :
-      totalMargin > 0 ?
-      'rgba(0, 160, 80, 0.9)' :
-      'rgba(0, 100, 255, 0.9)';
+      label.style.backgroundColor = isOverlap
+        ? 'rgba(200, 50, 50, 0.9)'
+        : totalMargin > 0
+          ? 'rgba(0, 160, 80, 0.9)'
+          : 'rgba(0, 100, 255, 0.9)';
     }
   };
 
@@ -516,32 +516,32 @@ export function DragAndDrop() {
     if (controlsRef.current) return controlsRef.current;
 
     const buttons = [
-    {
-      id: 'delete',
-      label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`,
-      title: 'Delete'
-    },
-    {
-      id: 'duplicate',
-      label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19"/><path d="M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="6.5" cy="9.5" r=".5" fill="currentColor"/></svg>`,
-      title: 'Duplicate'
-    },
-    {
-      id: 'bring-forward',
-      label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="8" height="8" rx="2"/><path d="M4 10a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2"/><path d="M14 20a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2"/></svg>`,
-      title: 'Bring Forward'
-    },
-    {
-      id: 'send-backward',
-      label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-to-back-icon lucide-send-to-back"><rect x="14" y="14" width="8" height="8" rx="2"/><rect x="2" y="2" width="8" height="8" rx="2"/><path d="M7 14v1a2 2 0 0 0 2 2h1"/><path d="M14 7h1a2 2 0 0 1 2 2v1"/></svg>`,
-      title: 'Send Backward'
-    },
-    {
-      id: 'ai-prompt',
-      label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wand-sparkles-icon lucide-wand-sparkles"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>`,
-      title: 'AI'
-    }] as
-    const;
+      {
+        id: 'delete',
+        label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>`,
+        title: 'Delete',
+      },
+      {
+        id: 'duplicate',
+        label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5 6.3 6.3a2.4 2.4 0 0 1 0 3.4L17 19"/><path d="M9.586 5.586A2 2 0 0 0 8.172 5H3a1 1 0 0 0-1 1v5.172a2 2 0 0 0 .586 1.414L8.29 18.29a2.426 2.426 0 0 0 3.42 0l3.58-3.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="6.5" cy="9.5" r=".5" fill="currentColor"/></svg>`,
+        title: 'Duplicate',
+      },
+      {
+        id: 'bring-forward',
+        label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="8" height="8" rx="2"/><path d="M4 10a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2"/><path d="M14 20a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2"/></svg>`,
+        title: 'Bring Forward',
+      },
+      {
+        id: 'send-backward',
+        label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-to-back-icon lucide-send-to-back"><rect x="14" y="14" width="8" height="8" rx="2"/><rect x="2" y="2" width="8" height="8" rx="2"/><path d="M7 14v1a2 2 0 0 0 2 2h1"/><path d="M14 7h1a2 2 0 0 1 2 2v1"/></svg>`,
+        title: 'Send Backward',
+      },
+      {
+        id: 'ai-prompt',
+        label: `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wand-sparkles-icon lucide-wand-sparkles"><path d="m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72"/><path d="m14 7 3 3"/><path d="M5 6v4"/><path d="M19 14v4"/><path d="M10 2v2"/><path d="M7 8H3"/><path d="M21 16h-4"/><path d="M11 3H9"/></svg>`,
+        title: 'AI',
+      },
+    ] as const;
 
     const panel = document.createElement('div');
     panel.className = 'element-control-panel';
@@ -631,9 +631,9 @@ export function DragAndDrop() {
               detail: {
                 prompt: aiTextarea.value,
                 id: selectedElementRef.current.id,
-                path: params
-              }
-            })
+                path: params,
+              },
+            }),
           );
           aiSendButton.innerText = 'Processing .... ';
           aiTextarea.value = '';
@@ -683,8 +683,8 @@ export function DragAndDrop() {
         tooltip.style.display = 'block';
         const rect = btn.getBoundingClientRect();
         tooltip.style.left = `${
-        rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-
+          rect.left + rect.width / 2 - tooltip.offsetWidth / 2
+        }px`;
 
         tooltip.style.top = `${rect.top - 40}px`;
       });
@@ -711,12 +711,12 @@ export function DragAndDrop() {
         e.stopPropagation();
         if (button.id === 'ai-prompt') {
           aiPromptContainer.style.display =
-          aiPromptContainer.style.display === 'none' ? 'block' : 'none';
+            aiPromptContainer.style.display === 'none' ? 'block' : 'none';
           return;
         }
         latestHandlersRef.current.handleControlClick(
           e as globalThis.MouseEvent,
-          button.id as unknown as Action
+          button.id as unknown as Action,
         );
       });
 
@@ -760,7 +760,7 @@ export function DragAndDrop() {
         resizeWrapperRef.current.style.height = `${rect.height}px`;
       }
     },
-    [createControlPanel]
+    [createControlPanel],
   );
 
   // ================= Resize Handles Management =================
@@ -803,7 +803,7 @@ export function DragAndDrop() {
       wrapper.style.left = `${rect.left}px`;
       selectedElementRef.current = element;
     },
-    [createResizeWrapper]
+    [createResizeWrapper],
   );
 
   // ============== hide resize handler Method ================
@@ -853,7 +853,7 @@ export function DragAndDrop() {
         height: element.style.height,
         opacity: element.style.opacity,
         left: element.style.left,
-        top: element.style.top
+        top: element.style.top,
       };
 
       const relativeLeft = element.offsetLeft;
@@ -977,7 +977,7 @@ export function DragAndDrop() {
       document.addEventListener('mousemove', doResize);
       document.addEventListener('mouseup', stopResize);
     },
-    [showControls, showResizeHandles, hideControls]
+    [showControls, showResizeHandles, hideControls],
   );
 
   // ========= helper method to get body scale =======
@@ -986,7 +986,7 @@ export function DragAndDrop() {
     const matrix = new DOMMatrix(bodyStyle.transform);
     return {
       scaleX: matrix.a || 1,
-      scaleY: matrix.d || 1
+      scaleY: matrix.d || 1,
     };
   }, []);
 
@@ -1000,9 +1000,9 @@ export function DragAndDrop() {
           detail: {
             prompt: aiPrompt,
             elementId: selectedElementRef.current.id,
-            elementPath: params
-          }
-        })
+            elementPath: params,
+          },
+        }),
       );
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -1048,7 +1048,7 @@ export function DragAndDrop() {
       rect.style.height = `${height}px`;
       rect.style.display = 'block';
     },
-    [createSelectionRectangle]
+    [createSelectionRectangle],
   );
 
   // ============ HIDE SELECTION RECTANGLE ============
@@ -1082,15 +1082,15 @@ export function DragAndDrop() {
     if (!selectedElementsRef.current.includes(element)) return;
 
     selectedElementsRef.current = selectedElementsRef.current.filter(
-      (el) => el !== element
+      (el) => el !== element,
     );
     element.classList.remove('selected-element');
 
     if (selectedElementRef.current === element) {
       selectedElementRef.current =
-      selectedElementsRef.current.length > 0 ?
-      selectedElementsRef.current[selectedElementsRef.current.length - 1] :
-      null;
+        selectedElementsRef.current.length > 0
+          ? selectedElementsRef.current[selectedElementsRef.current.length - 1]
+          : null;
     }
   }, []);
 
@@ -1103,20 +1103,20 @@ export function DragAndDrop() {
         addToSelection(element);
       }
     },
-    [addToSelection, removeFromSelection]
+    [addToSelection, removeFromSelection],
   );
 
   // Helper type for compatibility with plain rect objects or DOMRect
   type RectLike =
-  {
-    left: number;
-    top: number;
-    right: number;
-    bottom: number;
-    width?: number;
-    height?: number;
-  } |
-  DOMRect;
+    | {
+        left: number;
+        top: number;
+        right: number;
+        bottom: number;
+        width?: number;
+        height?: number;
+      }
+    | DOMRect;
 
   // ========== showControlsForMultiple (fixed) ==========
   const showControlsForMultiple = useCallback(
@@ -1157,40 +1157,40 @@ export function DragAndDrop() {
         top: `${minY - 8}px`,
         width: `${maxX - minX + 16}px`,
         height: `${maxY - minY + 16}px`,
-        zIndex: '10000'
+        zIndex: '10000',
       });
       resizeWrapperRef.current = wrapper;
     },
-    [createControlPanel, createResizeWrapper, hideControls]
+    [createControlPanel, createResizeWrapper, hideControls],
   );
 
   const selectElementsInRectangle = useCallback(
-    (rectInput: RectLike, options?: {add?: boolean;}) => {
+    (rectInput: RectLike, options?: { add?: boolean }) => {
       const rect =
-      'left' in rectInput && typeof (rectInput as any).left === 'number' ?
-      rectInput as RectLike :
-      rectInput as DOMRect;
+        'left' in rectInput && typeof (rectInput as any).left === 'number'
+          ? (rectInput as RectLike)
+          : (rectInput as DOMRect);
 
       const add = options?.add ?? !!isMultiSelectKeyPressedRef.current;
 
       const selectableElements = document.querySelectorAll(
-        SELECTABLE_SELECTOR
+        SELECTABLE_SELECTOR,
       ) as NodeListOf<HTMLElement>;
       const newlySelected: HTMLElement[] = [];
 
       selectableElements.forEach((element) => {
         if (
-        !element.offsetParent &&
-        getComputedStyle(element).position === 'static')
-        {
+          !element.offsetParent &&
+          getComputedStyle(element).position === 'static'
+        ) {
         }
         const r = element.getBoundingClientRect();
         const isIntersecting = !(
-        r.right < (rect as any).left ||
-        r.left > (rect as any).right ||
-        r.bottom < (rect as any).top ||
-        r.top > (rect as any).bottom);
-
+          r.right < (rect as any).left ||
+          r.left > (rect as any).right ||
+          r.bottom < (rect as any).top ||
+          r.top > (rect as any).bottom
+        );
 
         if (isIntersecting) newlySelected.push(element);
       });
@@ -1205,13 +1205,13 @@ export function DragAndDrop() {
       }
       if (selectedElementsRef.current.length > 0) {
         activeElementRef.current =
-        selectedElementsRef.current[selectedElementsRef.current.length - 1];
+          selectedElementsRef.current[selectedElementsRef.current.length - 1];
         showControlsForMultiple(selectedElementsRef.current);
       } else {
         hideControls();
       }
     },
-    [clearSelection, showControlsForMultiple, hideControls]
+    [clearSelection, showControlsForMultiple, hideControls],
   );
 
   const handleControlClick = useCallback(
@@ -1222,12 +1222,12 @@ export function DragAndDrop() {
         if (!element || !document.contains(element)) return;
 
         const dispatchToParent = (
-        type: string,
-        detail: Record<string, string>) =>
-        {
+          type: string,
+          detail: Record<string, string>,
+        ) => {
           try {
             window.parent?.document?.dispatchEvent(
-              new CustomEvent(type, { detail })
+              new CustomEvent(type, { detail }),
             );
           } catch (err) {
             console.warn('Could not dispatch event to parent:', err);
@@ -1235,20 +1235,20 @@ export function DragAndDrop() {
         };
 
         const numericStyleValue = (
-        el: Element,
-        prop: 'left' | 'top' | 'zIndex') =>
-        {
+          el: Element,
+          prop: 'left' | 'top' | 'zIndex',
+        ) => {
           const cs = window.getComputedStyle(el as Element);
           const raw =
-          (prop === 'zIndex' ?
-          cs.zIndex :
-          prop === 'left' ?
-          cs.left :
-          cs.top) || '';
+            (prop === 'zIndex'
+              ? cs.zIndex
+              : prop === 'left'
+                ? cs.left
+                : cs.top) || '';
           const v = parseFloat(raw as string);
           if (!Number.isFinite(v)) {
             if (prop === 'left')
-            return (element as HTMLElement).offsetLeft ?? 0;
+              return (element as HTMLElement).offsetLeft ?? 0;
             if (prop === 'top') return (element as HTMLElement).offsetTop ?? 0;
             return 0;
           }
@@ -1256,97 +1256,97 @@ export function DragAndDrop() {
         };
 
         switch (action) {
-          case 'delete':{
-              const deletedElement = element;
-              deletedElement.dataset.deletedElement = 'true';
-              updateElementAttributes(deletedElement);
-              deletedElement.remove();
-              break;
-            }
+          case 'delete': {
+            const deletedElement = element;
+            deletedElement.dataset.deletedElement = 'true';
+            updateElementAttributes(deletedElement);
+            deletedElement.remove();
+            break;
+          }
 
-          case 'duplicate':{
-              const clone = element.cloneNode(true) as HTMLElement;
-              clone.id = `${element.tagName.
-              toLocaleLowerCase().
-              slice(0, 2)}-${Date.now().toString()}`;
-              const originalComputed = window.getComputedStyle(element);
-              clone.style.marginLeft = `${parseInt(
-                originalComputed.marginLeft
-              )}px`;
-              clone.style.top = `${parseInt(originalComputed.marginLeft) + 20}px`;
-              try {
-                const parentNode = element.parentNode as HTMLElement | null;
-                if (!parentNode)
+          case 'duplicate': {
+            const clone = element.cloneNode(true) as HTMLElement;
+            clone.id = `${element.tagName
+              .toLocaleLowerCase()
+              .slice(0, 2)}-${Date.now().toString()}`;
+            const originalComputed = window.getComputedStyle(element);
+            clone.style.marginLeft = `${parseInt(
+              originalComputed.marginLeft,
+            )}px`;
+            clone.style.top = `${parseInt(originalComputed.marginLeft) + 20}px`;
+            try {
+              const parentNode = element.parentNode as HTMLElement | null;
+              if (!parentNode)
                 throw new Error(
-                  'Original element has no parent to insert into.'
+                  'Original element has no parent to insert into.',
                 );
-                const elementAbsolutePos = getAbsolutePositions(
-                  element.parentElement,
-                  true
-                );
-                parentNode.insertBefore(clone, element.nextSibling);
-                const parent = element.parentElement;
-                const children = parent?.children;
-                const containerRect =
+              const elementAbsolutePos = getAbsolutePositions(
+                element.parentElement,
+                true,
+              );
+              parentNode.insertBefore(clone, element.nextSibling);
+              const parent = element.parentElement;
+              const children = parent?.children;
+              const containerRect =
                 element.parentElement?.getBoundingClientRect();
-                if (!children || !containerRect) return;
-                arrangeAllElements(
-                  elementAbsolutePos,
-                  children,
-                  containerRect,
-                  parent
-                );
-                const parentElement = clone.parentElement;
-                const childrenArray = Array.from(parentElement?.children ?? []);
-                const index = childrenArray.indexOf(clone);
-                const parentId = parentElement?.id ?? '';
-                const newAttributes: ElementAttributes = {
-                  id: clone.id,
-                  index,
-                  parentId,
-                  type: clone.tagName.toLowerCase(),
-                  path: params,
-                  isNew: true,
-                  attributes: {},
-                  dataset: { ...(clone.dataset ?? {}) },
-                  textContent: clone.textContent ?? '',
-                  children: []
-                };
+              if (!children || !containerRect) return;
+              arrangeAllElements(
+                elementAbsolutePos,
+                children,
+                containerRect,
+                parent,
+              );
+              const parentElement = clone.parentElement;
+              const childrenArray = Array.from(parentElement?.children ?? []);
+              const index = childrenArray.indexOf(clone);
+              const parentId = parentElement?.id ?? '';
+              const newAttributes: ElementAttributes = {
+                id: clone.id,
+                index,
+                parentId,
+                type: clone.tagName.toLowerCase(),
+                path: params,
+                isNew: true,
+                attributes: {},
+                dataset: { ...(clone.dataset ?? {}) },
+                textContent: clone.textContent ?? '',
+                children: [],
+              };
 
-                activeElementsAttributes.current = [
+              activeElementsAttributes.current = [
                 ...(activeElementsAttributes.current ?? []),
-                newAttributes];
+                newAttributes,
+              ];
 
-
-                dispatchToParent('ELEMENT_DUPLICATED', {
-                  originalId: element.id,
-                  id: clone.id,
-                  parentId,
-                  path: params
-                });
-              } catch (error) {
-                console.error('Failed to insert duplicate element:', error);
-              }
-              break;
+              dispatchToParent('ELEMENT_DUPLICATED', {
+                originalId: element.id,
+                id: clone.id,
+                parentId,
+                path: params,
+              });
+            } catch (error) {
+              console.error('Failed to insert duplicate element:', error);
             }
+            break;
+          }
 
-          case 'bring-forward':{
-              const currentZ = numericStyleValue(element, 'zIndex');
-              const newZ = currentZ + 1;
-              element.style.zIndex = `${newZ}`;
-            }
+          case 'bring-forward': {
+            const currentZ = numericStyleValue(element, 'zIndex');
+            const newZ = currentZ + 1;
+            element.style.zIndex = `${newZ}`;
+          }
 
-          case 'send-backward':{
-              const currentZ = numericStyleValue(element, 'zIndex');
-              const newZ = Math.max(0, currentZ - 1);
-              element.style.zIndex = `${newZ}`;
-              break;
-            }
+          case 'send-backward': {
+            const currentZ = numericStyleValue(element, 'zIndex');
+            const newZ = Math.max(0, currentZ - 1);
+            element.style.zIndex = `${newZ}`;
+            break;
+          }
         }
       });
 
       selectedElementsRef.current = selectedElementsRef.current.filter((el) =>
-      document.contains(el)
+        document.contains(el),
       );
 
       if (selectedElementsRef.current.length === 0) {
@@ -1354,11 +1354,11 @@ export function DragAndDrop() {
         hideControls();
       } else {
         selectedElementRef.current =
-        selectedElementsRef.current[selectedElementsRef.current.length - 1];
+          selectedElementsRef.current[selectedElementsRef.current.length - 1];
         showControlsForMultiple();
       }
     },
-    [hideControls, showControlsForMultiple, params]
+    [hideControls, showControlsForMultiple, params],
   );
 
   //=============================== flex & grid ==================================================
@@ -1377,7 +1377,7 @@ export function DragAndDrop() {
         transition: 'all 120ms ease',
         minHeight: '4px',
         minWidth: '4px',
-        zIndex: '9999'
+        zIndex: '9999',
       });
 
       initalPlaceholderRef.current = ph;
@@ -1614,19 +1614,19 @@ export function DragAndDrop() {
   // ======================= UNIVERSAL DROP POSITION (LAYOUT-AGNOSTIC) ====================
   const getInsertDropPosition = useCallback(
     (
-    container: HTMLElement,
-    clientX: number,
-    clientY: number)
-    : HTMLElement | null => {
+      container: HTMLElement,
+      clientX: number,
+      clientY: number,
+    ): HTMLElement | null => {
       if (!container) return null;
 
       const containerRect = container.getBoundingClientRect();
 
       const children = Array.from(container.children).filter(
         (el): el is HTMLElement =>
-        (el as HTMLElement).id !== 'drop-placeholder' &&
-        (el as HTMLElement).offsetWidth > 0 &&
-        (el as HTMLElement).offsetHeight > 0
+          (el as HTMLElement).id !== 'drop-placeholder' &&
+          (el as HTMLElement).offsetWidth > 0 &&
+          (el as HTMLElement).offsetHeight > 0,
       );
 
       if (children.length === 0) {
@@ -1635,7 +1635,7 @@ export function DragAndDrop() {
 
       const childData = children.map((child) => ({
         el: child,
-        rect: child.getBoundingClientRect()
+        rect: child.getBoundingClientRect(),
       }));
       let isPrimarilyHorizontal = true;
 
@@ -1703,11 +1703,11 @@ export function DragAndDrop() {
         }
       }
 
-      return bestGapIndex < childData.length ?
-      childData[bestGapIndex].el :
-      null;
+      return bestGapIndex < childData.length
+        ? childData[bestGapIndex].el
+        : null;
     },
-    []
+    [],
   );
 
   const showPlaceholder = useCallback(
@@ -1756,7 +1756,7 @@ export function DragAndDrop() {
       placeholder.style.display = 'block';
     },
 
-    [getInsertDropPosition, styleCache]
+    [getInsertDropPosition, styleCache],
   );
 
   const hidePlaceholder = useCallback(() => {
@@ -1791,9 +1791,9 @@ export function DragAndDrop() {
       }
 
       if (
-      target.closest('.element-control-panel') ||
-      target.classList.contains('resize-handle'))
-      {
+        target.closest('.element-control-panel') ||
+        target.classList.contains('resize-handle')
+      ) {
         return;
       }
 
@@ -1842,12 +1842,12 @@ export function DragAndDrop() {
           pointerEvents: 'none',
           transform: 'translateZ(0)',
           willChange: 'left, top',
-          visibility: 'visible'
+          visibility: 'visible',
         });
 
         activeElementRef.current?.parentElement?.insertBefore(
           ghost,
-          activeElementRef.current.nextSibling
+          activeElementRef.current.nextSibling,
         );
 
         ghostElementRef.current = ghost;
@@ -1875,7 +1875,7 @@ export function DragAndDrop() {
 
         if (!isFinite(minX)) {
           selectedElementsRef.current.forEach(
-            (el) => el.style.visibility = 'visible'
+            (el) => (el.style.visibility = 'visible'),
           );
           return;
         }
@@ -1886,7 +1886,7 @@ export function DragAndDrop() {
           right: maxX,
           bottom: maxY,
           width: maxX - minX,
-          height: maxY - minY
+          height: maxY - minY,
         };
         const ghostWrapper = document.createElement('div');
         ghostWrapper.classList.add('ghost-wrapper', 'drag');
@@ -1900,7 +1900,7 @@ export function DragAndDrop() {
           background: 'rgba(74,144,226,0.1)',
           zIndex: '1000',
           pointerEvents: 'none',
-          boxSizing: 'border-box'
+          boxSizing: 'border-box',
         });
 
         selectedElementsRef.current.forEach((el) => {
@@ -1931,19 +1931,18 @@ export function DragAndDrop() {
       e.preventDefault();
     },
     [
-    getBodyScale,
-    toggleSelection,
-    clearSelection,
-    addToSelection,
-    hideControls,
-    hideResizeHandles,
-    hidePlaceholder]
-
+      getBodyScale,
+      toggleSelection,
+      clearSelection,
+      addToSelection,
+      hideControls,
+      hideResizeHandles,
+      hidePlaceholder,
+    ],
   );
 
   // =================  main part  =================
   const elementTrees = useRef<ElementAttributes[]>([]);
-
   const updateElementAttributes = useCallback((element: HTMLElement) => {
     if (!element.parentElement) return;
 
@@ -1952,24 +1951,24 @@ export function DragAndDrop() {
     if (excludeParents.includes(parent.tagName.toLowerCase())) return;
 
     const ensureId = (
-    el: HTMLElement,
-    parentId: string | null,
-    index: number)
-    : string => {
+      el: HTMLElement,
+      parentId: string | null,
+      index: number,
+    ): string => {
       if (el.id && el.id.trim() !== '') return el.id;
       el.dataset.dynamicElement = 'true';
       return `__auto_${parentId ?? 'root'}_${index}_${el.tagName.toLowerCase()}`;
     };
 
     const findElementInTrees = (
-    targetId: string,
-    trees: ElementAttributes[]) =>
-    {
+      targetId: string,
+      trees: ElementAttributes[],
+    ) => {
       for (let treeIndex = 0; treeIndex < trees.length; treeIndex++) {
         const root = trees[treeIndex];
-        const stack: {node: ElementAttributes;path: number[];}[] = [
-        { node: root, path: [] }];
-
+        const stack: { node: ElementAttributes; path: number[] }[] = [
+          { node: root, path: [] },
+        ];
 
         while (stack.length) {
           const { node, path } = stack.pop()!;
@@ -2010,37 +2009,89 @@ export function DragAndDrop() {
       }
     };
 
+    // const getElementAttributes = (
+    //   el: HTMLElement,
+    //   parentId: string | null,
+    //   index: number,
+    // ): ElementAttributes => {
+    //   const id = ensureId(el, parentId, index);
+    //   const elementAttributes: ElementAttributes = {
+    //     id,
+    //     index,
+    //     parentId: element.parentElement?.id,
+    //     path: el.getAttribute('data-path') || '',
+    //     type: el.tagName.toLowerCase(),
+    //     isNew: true,
+    //     textContent: getDirectTextContent(el),
+    //     children: [],
+    //     attributes: {},
+    //     dataset: { ...el.dataset },
+    //   };
+
+    //   Array.from(el.attributes).forEach((attr) => {
+    //     if (attr.name === 'style') {
+    //       const styleObject: Record<string, string> = {};
+    //       attr.value.split(';').forEach((declaration) => {
+    //         const [property, value] = declaration
+    //           .split(':')
+    //           .map((p) => p.trim());
+    //         if (property && value) styleObject[property] = value;
+    //       });
+    //       elementAttributes.attributes![attr.name] = styleObject;
+    //     } else {
+    //       elementAttributes.attributes![attr.name] = attr.value;
+    //     }
+    //   });
+
+    //   return elementAttributes;
+    // };
+
     const getElementAttributes = (
-    el: HTMLElement,
-    parentId: string | null,
-    index: number)
-    : ElementAttributes => {
+      el: HTMLElement,
+      parentId: string | null,
+      index: number,
+    ): ElementAttributes => {
       const id = ensureId(el, parentId, index);
+
       const elementAttributes: ElementAttributes = {
         id,
         index,
-        parentId: element.parentElement?.id,
+        parentId: el.parentElement?.id ?? null,
         path: el.getAttribute('data-path') || '',
         type: el.tagName.toLowerCase(),
         isNew: true,
         textContent: getDirectTextContent(el),
         children: [],
         attributes: {},
-        dataset: { ...el.dataset }
+        dataset: { ...el.dataset },
       };
 
+      const styleObject: Record<string, string> = {};
+
+      const styleAttr = el.getAttribute('style');
+      if (styleAttr) {
+        styleAttr.split(';').forEach((declaration) => {
+          const [property, value] = declaration.split(':').map((p) => p.trim());
+          if (property && value) {
+            styleObject[property] = value;
+          }
+        });
+      }
+
+      const bgImage =
+        el.style.backgroundImage || window.getComputedStyle(el).backgroundImage;
+      if (bgImage && bgImage !== 'none') {
+        styleObject['background-image'] = bgImage;
+        elementAttributes.attributes['background-image'] = bgImage;
+      }
+
+      if (Object.keys(styleObject).length > 0) {
+        elementAttributes.attributes['style'] = styleObject;
+      }
+
       Array.from(el.attributes).forEach((attr) => {
-        if (attr.name === 'style') {
-          const styleObject: Record<string, string> = {};
-          attr.value.split(';').forEach((declaration) => {
-            const [property, value] = declaration.
-            split(':').
-            map((p) => p.trim());
-            if (property && value) styleObject[property] = value;
-          });
-          elementAttributes.attributes![attr.name] = styleObject;
-        } else {
-          elementAttributes.attributes![attr.name] = attr.value;
+        if (attr.name !== 'style') {
+          elementAttributes.attributes[attr.name] = attr.value;
         }
       });
 
@@ -2048,16 +2099,16 @@ export function DragAndDrop() {
     };
 
     const traversing = (
-    currentElement: HTMLElement,
-    parentId: string | null)
-    : ElementAttributes => {
+      currentElement: HTMLElement,
+      parentId: string | null,
+    ): ElementAttributes => {
       const index = Array.from(
-        currentElement.parentElement?.children || []
+        currentElement.parentElement?.children || [],
       ).indexOf(currentElement);
       const elementAttributes = getElementAttributes(
         currentElement,
         parentId,
-        index
+        index,
       );
 
       Array.from(currentElement.children).forEach((child) => {
@@ -2073,21 +2124,21 @@ export function DragAndDrop() {
 
     const currentDomParent = element.parentElement!;
     const currentDomIndex = Array.from(currentDomParent.children).indexOf(
-      element
+      element,
     );
     const currentParentId =
-    currentDomParent.id || `parent-${currentDomParent.tagName}`;
+      currentDomParent.id || `parent-${currentDomParent.tagName}`;
 
     const elementId = ensureId(element, currentParentId, currentDomIndex);
     const existingElementInfo = findElementInTrees(
       elementId,
-      elementTrees.current
+      elementTrees.current,
     );
 
     if (existingElementInfo) {
       removeNodeByPath(
         existingElementInfo.treeIndex,
-        existingElementInfo.nodePath
+        existingElementInfo.nodePath,
       );
     }
 
@@ -2107,23 +2158,20 @@ export function DragAndDrop() {
 
     window.parent?.document?.dispatchEvent(
       new CustomEvent('NEXTJS_TREE_UPDATE', {
-        detail: { tree: elementTrees.current }
-      })
+        detail: { tree: elementTrees.current },
+      }),
     );
 
     return elementTrees.current;
   }, []);
 
   const getDirectTextContent = (element: HTMLElement): string => {
-    return Array.from(element.childNodes).
-    filter((node) => node.nodeType === Node.TEXT_NODE).
-    map((node) => node.textContent?.trim() || '').
-    join(' ').
-    trim();
+    return Array.from(element.childNodes)
+      .filter((node) => node.nodeType === Node.TEXT_NODE)
+      .map((node) => node.textContent?.trim() || '')
+      .join(' ')
+      .trim();
   };
-
-
-
 
   const makeElementEditable = useCallback(
     (element: HTMLElement | null) => {
@@ -2143,7 +2191,7 @@ export function DragAndDrop() {
 
       element.dataset.__isEditing = 'true';
       const textNode = Array.from(element.childNodes).find(
-        (n) => n.nodeType === Node.TEXT_NODE && n.textContent?.trim() !== ''
+        (n) => n.nodeType === Node.TEXT_NODE && n.textContent?.trim() !== '',
       ) as Text | undefined;
 
       const originalTextContent = textNode?.textContent || '';
@@ -2213,21 +2261,24 @@ export function DragAndDrop() {
       const cleanup = () => {
         editableSpan.removeEventListener('blur', handleBlur);
         editableSpan.removeEventListener('keydown', handleKeyDown);
-        editableSpan.removeEventListener('compositionstart', handleCompositionStart);
-        editableSpan.removeEventListener('compositionend', handleCompositionEnd);
+        editableSpan.removeEventListener(
+          'compositionstart',
+          handleCompositionStart,
+        );
+        editableSpan.removeEventListener(
+          'compositionend',
+          handleCompositionEnd,
+        );
         delete element.dataset.__isEditing;
         delete (element as any).__cleanupEditable;
       };
-
 
       editableSpan.addEventListener('blur', handleBlur);
       editableSpan.addEventListener('keydown', handleKeyDown);
       editableSpan.addEventListener('compositionstart', handleCompositionStart);
       editableSpan.addEventListener('compositionend', handleCompositionEnd);
 
-
       (element as any).__cleanupEditable = cleanup;
-
 
       setTimeout(() => {
         if (finalized) return;
@@ -2243,9 +2294,8 @@ export function DragAndDrop() {
         }
       }, 10);
     },
-    [updateElementAttributes]
+    [updateElementAttributes],
   );
-
 
   const SELECTABLE_SELECTOR = '';
 
@@ -2258,7 +2308,7 @@ export function DragAndDrop() {
       target.classList.add('selected-element');
       makeElementEditable(target);
     },
-    [makeElementEditable]
+    [makeElementEditable],
   );
 
   // ============ MODIFIED HANDLE ELEMENT CLICK ============
@@ -2271,13 +2321,13 @@ export function DragAndDrop() {
       selectAbleElement.current = selectable;
       selectable.setAttribute('data-selected', 'true');
       const isInteractive = target.matches(
-        'input, textarea, select, button, a, [contenteditable],svg'
+        'input, textarea, select, button, a, [contenteditable],svg',
       );
 
       if (isInteractive && selectable) {
         selectable.addEventListener('click', (event) => event.preventDefault());
         selectable.addEventListener('click', (event) =>
-        event.stopPropagation()
+          event.stopPropagation(),
         );
       }
       if (isInteractive && !selectable) {
@@ -2297,20 +2347,20 @@ export function DragAndDrop() {
       }
       const parent = selectable.parentElement;
       if (
-      parent && (
-      window.getComputedStyle(parent).display.includes('flex') ||
-      window.getComputedStyle(parent).display.includes('grid')))
-      {
+        parent &&
+        (window.getComputedStyle(parent).display.includes('flex') ||
+          window.getComputedStyle(parent).display.includes('grid'))
+      ) {
         event.preventDefault();
         event.stopPropagation();
       }
     },
     [
-    isMultiSelectKeyPressed,
-    clearSelection,
-    showControlsForMultiple,
-    hideControls]
-
+      isMultiSelectKeyPressed,
+      clearSelection,
+      showControlsForMultiple,
+      hideControls,
+    ],
   );
 
   // =============  hand mouse down method ===========
@@ -2324,15 +2374,15 @@ export function DragAndDrop() {
 
       const selectableEl = target;
       const isInteractivePress = target.matches(
-        'input, textarea, select, button, a, [contenteditable], svg'
+        'input, textarea, select, button, a, [contenteditable], svg',
       );
 
       if (isInteractivePress && selectableEl) {
         selectableEl.addEventListener('click', (event) =>
-        event.preventDefault()
+          event.preventDefault(),
         );
         selectableEl.addEventListener('click', (event) =>
-        event.stopPropagation()
+          event.stopPropagation(),
         );
       }
       if (isInteractivePress && !selectableEl) {
@@ -2361,7 +2411,7 @@ export function DragAndDrop() {
             selectionStartPoint.current.x,
             selectionStartPoint.current.y,
             me.clientX,
-            me.clientY
+            me.clientY,
           );
         };
 
@@ -2385,7 +2435,7 @@ export function DragAndDrop() {
               right: Math.max(selectionStartPoint.current.x, ue.clientX),
               bottom: Math.max(selectionStartPoint.current.y, ue.clientY),
               width,
-              height
+              height,
             };
             selectElementsInRectangle(rect);
           }
@@ -2421,18 +2471,18 @@ export function DragAndDrop() {
             elementIndex = Array.from(children).indexOf(selectableEl);
           }
         }
-        const id = selectableEl.id ?
-        selectableEl.id :
-        selectableEl.parentElement.id;
+        const id = selectableEl.id
+          ? selectableEl.id
+          : selectableEl.parentElement.id;
         window.parent?.document?.dispatchEvent(
           new CustomEvent('ELEMENT_SELECTED', {
             detail: {
               id,
               multiSelect: multi,
               elementIndex,
-              hasId: selectableEl.id !== '' ? false : true
-            }
-          })
+              hasId: selectableEl.id !== '' ? false : true,
+            },
+          }),
         );
       } catch (err) {
         console.warn('Could not dispatch ELEMENT_SELECTED to parent:', err);
@@ -2462,17 +2512,17 @@ export function DragAndDrop() {
       document.addEventListener('mouseup', onUpDrag);
     },
     [
-    createSelectionRectangle,
-    updateSelectionRectangle,
-    hideSelectionRectangle,
-    selectElementsInRectangle,
-    handleElementClick,
-    dragElement,
-    toggleSelection,
-    clearSelection,
-    addToSelection,
-    showControls]
-
+      createSelectionRectangle,
+      updateSelectionRectangle,
+      hideSelectionRectangle,
+      selectElementsInRectangle,
+      handleElementClick,
+      dragElement,
+      toggleSelection,
+      clearSelection,
+      addToSelection,
+      showControls,
+    ],
   );
 
   // ==========  hide the snap gride =======
@@ -2504,8 +2554,8 @@ export function DragAndDrop() {
   const PANEL_HEIGHT = 70;
 
   const pendingMoveEventRef = useRef<
-    globalThis.MouseEvent | globalThis.TouchEvent | null>(
-    null);
+    globalThis.MouseEvent | globalThis.TouchEvent | null
+  >(null);
   const moveScheduledRef = useRef(false);
 
   const handleMove = useCallback(
@@ -2530,9 +2580,9 @@ export function DragAndDrop() {
           clientX = (e as MouseEvent).clientX;
           clientY = (e as MouseEvent).clientY;
         } else if (
-        (e as TouchEvent).touches &&
-        (e as TouchEvent).touches.length)
-        {
+          (e as TouchEvent).touches &&
+          (e as TouchEvent).touches.length
+        ) {
           clientX = (e as TouchEvent).touches[0].clientX;
           clientY = (e as TouchEvent).touches[0].clientY;
         } else {
@@ -2577,22 +2627,22 @@ export function DragAndDrop() {
           const considerX = (left: number, guideX: number, priority = 0) => {
             const d = Math.abs(left - targetLeft);
             if (
-            d <= snapThreshold && (
-            !bestX ||
-            d < bestX.d ||
-            d === bestX.d && priority > bestX.priority))
-            {
+              d <= snapThreshold &&
+              (!bestX ||
+                d < bestX.d ||
+                (d === bestX.d && priority > bestX.priority))
+            ) {
               bestX = { left, guideX, d, priority };
             }
           };
           const considerY = (top: number, guideY: number, priority = 0) => {
             const d = Math.abs(top - targetTop);
             if (
-            d <= snapThreshold && (
-            !bestY ||
-            d < bestY.d ||
-            d === bestY.d && priority > bestY.priority))
-            {
+              d <= snapThreshold &&
+              (!bestY ||
+                d < bestY.d ||
+                (d === bestY.d && priority > bestY.priority))
+            ) {
               bestY = { top, guideY, d, priority };
             }
           };
@@ -2605,7 +2655,7 @@ export function DragAndDrop() {
           }
 
           const siblings = Array.from(container.children).filter(
-            (child) => child !== active && child !== ghost
+            (child) => child !== active && child !== ghost,
           ) as HTMLElement[];
 
           for (const sib of siblings) {
@@ -2632,10 +2682,10 @@ export function DragAndDrop() {
           }
 
           centerSnap =
-          !!bestX &&
-          Math.abs(bestX['guideX'] - cCenterX) < 0.5 &&
-          !!bestY &&
-          Math.abs(bestY['guideY'] - cCenterY) < 0.5;
+            !!bestX &&
+            Math.abs(bestX['guideX'] - cCenterX) < 0.5 &&
+            !!bestY &&
+            Math.abs(bestY['guideY'] - cCenterY) < 0.5;
         }
 
         ghost.style.left = `${targetLeft}px`;
@@ -2648,7 +2698,7 @@ export function DragAndDrop() {
             left: `${ghostRect.left}px`,
             top: `${ghostRect.top}px`,
             width: `${ghostRect.width}px`,
-            height: `${ghostRect.height}px`
+            height: `${ghostRect.height}px`,
           });
         }
 
@@ -2657,22 +2707,22 @@ export function DragAndDrop() {
             Object.assign(centerCrosshairRef.current.style, {
               left: `${ghostRect.left + ghostRect.width / 2}px`,
               top: `${ghostRect.top + ghostRect.height / 2}px`,
-              display: 'block'
+              display: 'block',
             });
           }
           if (verticalGuideRef?.current)
-          verticalGuideRef.current.style.display = 'none';
+            verticalGuideRef.current.style.display = 'none';
           if (horizontalGuideRef?.current)
-          horizontalGuideRef.current.style.display = 'none';
+            horizontalGuideRef.current.style.display = 'none';
         } else {
           if (centerCrosshairRef?.current)
-          centerCrosshairRef.current.style.display = 'none';
+            centerCrosshairRef.current.style.display = 'none';
 
           if (verticalGuideRef?.current) {
             if (showV != null) {
               Object.assign(verticalGuideRef.current.style, {
                 left: `${showV}px`,
-                display: 'block'
+                display: 'block',
               });
             } else {
               verticalGuideRef.current.style.display = 'none';
@@ -2683,7 +2733,7 @@ export function DragAndDrop() {
             if (showH != null) {
               Object.assign(horizontalGuideRef.current.style, {
                 top: `${showH}px`,
-                display: 'block'
+                display: 'block',
               });
             } else {
               horizontalGuideRef.current.style.display = 'none';
@@ -2693,74 +2743,74 @@ export function DragAndDrop() {
 
         const elementsUnderPointer = document.elementsFromPoint(
           clientX,
-          clientY
+          clientY,
         );
         const scrollableContainer = elementsUnderPointer.find((el) => {
           const style = window.getComputedStyle(el as Element);
           return (
             (style.overflowY === 'auto' || style.overflowY === 'scroll') &&
-            (el as HTMLElement).scrollHeight > (el as HTMLElement).clientHeight);
-
+            (el as HTMLElement).scrollHeight > (el as HTMLElement).clientHeight
+          );
         }) as HTMLElement | undefined;
 
         if (scrollableContainer) {
           const cRect = scrollableContainer.getBoundingClientRect();
           if (clientY < cRect.top + CONTAINER_SCROLL_THRESHOLD)
-          scrollableContainer.scrollTop -= SCROLL_SPEED;else
-          if (clientY > cRect.bottom - CONTAINER_SCROLL_THRESHOLD)
-          scrollableContainer.scrollTop += SCROLL_SPEED;
+            scrollableContainer.scrollTop -= SCROLL_SPEED;
+          else if (clientY > cRect.bottom - CONTAINER_SCROLL_THRESHOLD)
+            scrollableContainer.scrollTop += SCROLL_SPEED;
           if (clientX < cRect.left + CONTAINER_SCROLL_THRESHOLD)
-          scrollableContainer.scrollLeft -= SCROLL_SPEED;else
-          if (clientX > cRect.right - CONTAINER_SCROLL_THRESHOLD)
-          scrollableContainer.scrollLeft += SCROLL_SPEED;
+            scrollableContainer.scrollLeft -= SCROLL_SPEED;
+          else if (clientX > cRect.right - CONTAINER_SCROLL_THRESHOLD)
+            scrollableContainer.scrollLeft += SCROLL_SPEED;
         }
         const candidateContainer = rawEvent.target as HTMLElement;
         if (!candidateContainer) return;
         if (controlsRef?.current) {
           const panelWidth = controlsRef.current.offsetWidth;
           const panelLeft =
-          ghostRect.left + ghostRect.width / 2 - panelWidth / 2;
+            ghostRect.left + ghostRect.width / 2 - panelWidth / 2;
           const panelTop = ghostRect.top - PANEL_HEIGHT - 10;
           controlsRef.current.style.left = `${Math.max(
             MIN_EDGE_DISTANCE,
             Math.min(
               panelLeft,
-              window.innerWidth - panelWidth - MIN_EDGE_DISTANCE
-            )
+              window.innerWidth - panelWidth - MIN_EDGE_DISTANCE,
+            ),
           )}px`;
           controlsRef.current.style.top = `${Math.max(
             MIN_EDGE_DISTANCE,
-            panelTop
+            panelTop,
           )}px`;
         }
 
         if (active.parentElement) {
-          const siblingsForDistances = Array.from(active.parentElement.children).
-          filter((child) => child !== active && child !== ghost).
-          map((child) => {
-            const rect = (child as HTMLElement).getBoundingClientRect();
-            return {
-              top: rect.top,
-              left: rect.left,
-              bottom: rect.bottom,
-              right: rect.right,
-              id: (child as HTMLElement).id || ''
-            };
-          });
+          const siblingsForDistances = Array.from(active.parentElement.children)
+            .filter((child) => child !== active && child !== ghost)
+            .map((child) => {
+              const rect = (child as HTMLElement).getBoundingClientRect();
+              return {
+                top: rect.top,
+                left: rect.left,
+                bottom: rect.bottom,
+                right: rect.right,
+                id: (child as HTMLElement).id || '',
+              };
+            });
           updateDistanceSpans(ghostRect, siblingsForDistances);
         }
 
-        if (clientX < SCROLL_THRESHOLD) window.scrollBy(-SCROLL_SPEED, 0);else
-        if (clientX > window.innerWidth - SCROLL_THRESHOLD)
-        window.scrollBy(SCROLL_SPEED, 0);
-        if (clientY < SCROLL_THRESHOLD) window.scrollBy(0, -SCROLL_SPEED);else
-        if (clientY > window.innerHeight - SCROLL_THRESHOLD)
-        window.scrollBy(0, SCROLL_SPEED);
+        if (clientX < SCROLL_THRESHOLD) window.scrollBy(-SCROLL_SPEED, 0);
+        else if (clientX > window.innerWidth - SCROLL_THRESHOLD)
+          window.scrollBy(SCROLL_SPEED, 0);
+        if (clientY < SCROLL_THRESHOLD) window.scrollBy(0, -SCROLL_SPEED);
+        else if (clientY > window.innerHeight - SCROLL_THRESHOLD)
+          window.scrollBy(0, SCROLL_SPEED);
 
         (e as Event).preventDefault?.();
       });
     },
-    [, updateDistanceSpans]
+    [, updateDistanceSpans],
   );
 
   // ========= get all elements absolute position =========
@@ -2782,41 +2832,41 @@ export function DragAndDrop() {
           top: rect.top,
           left: rect.left,
           width: rect.width,
-          height: rect.height
+          height: rect.height,
         };
 
         if (
-        ghostEl &&
-        activeEl &&
-        el === activeEl &&
-        !isPrevious &&
-        ghostRect)
-        {
+          ghostEl &&
+          activeEl &&
+          el === activeEl &&
+          !isPrevious &&
+          ghostRect
+        ) {
           return {
             ...basePosition,
             top: ghostRect.top,
             left: ghostRect.left,
             width: ghostRect.width || rect.width,
-            height: ghostRect.height || rect.height
+            height: ghostRect.height || rect.height,
           };
         }
 
         return basePosition;
       });
     },
-    []
+    [],
   );
 
   const round2 = (v: number): number => Math.round(v * 100) / 100;
 
   const arrangeAllElements = useCallback(
     (
-    lastElementsAbsolutePositions: Pos[],
-    children: HTMLCollection,
-    containerRect: DOMRect,
-    parent: HTMLElement,
-    isResizing: boolean = false)
-    : void => {
+      lastElementsAbsolutePositions: Pos[],
+      children: HTMLCollection,
+      containerRect: DOMRect,
+      parent: HTMLElement,
+      isResizing: boolean = false,
+    ): void => {
       if (!containerRect || !children?.length) return;
 
       const parentStyle = getComputedStyle(parent);
@@ -2831,21 +2881,21 @@ export function DragAndDrop() {
       const containerContentX = containerRect.left + borderLeft + paddingLeft;
       const containerContentY = containerRect.top + borderTop + paddingTop;
 
-      const items: {el: HTMLElement;pos: Pos;}[] = Array.from(children).
-      filter((el): el is HTMLElement => el instanceof HTMLElement).
-      filter((el) => el !== ghostElementRef?.current).
-      map((el) => {
-        const pos = lastElementsAbsolutePositions.find((p) => p.id === el.id);
-        return pos ? { el, pos } : null;
-      }).
-      filter((x): x is {el: HTMLElement;pos: Pos;} => x !== null);
+      const items: { el: HTMLElement; pos: Pos }[] = Array.from(children)
+        .filter((el): el is HTMLElement => el instanceof HTMLElement)
+        .filter((el) => el !== ghostElementRef?.current)
+        .map((el) => {
+          const pos = lastElementsAbsolutePositions.find((p) => p.id === el.id);
+          return pos ? { el, pos } : null;
+        })
+        .filter((x): x is { el: HTMLElement; pos: Pos } => x !== null);
 
       if (!items.length) return;
 
       const prevTransitions = items.map((i) => i.el.style.transition ?? '');
 
       if (isResizing === false || isMultiSelectKeyPressed) {
-        items.forEach((i) => i.el.style.transition = 'none');
+        items.forEach((i) => (i.el.style.transition = 'none'));
 
         items.forEach(({ el, pos }) => {
           const cs = getComputedStyle(el);
@@ -2854,13 +2904,13 @@ export function DragAndDrop() {
           }
 
           el.style.width =
-          typeof pos.width === 'number' ?
-          `${pos.width}px` :
-          pos.width || 'auto';
+            typeof pos.width === 'number'
+              ? `${pos.width}px`
+              : pos.width || 'auto';
           el.style.height =
-          typeof pos.height === 'number' ?
-          `${pos.height}px` :
-          pos.height || 'auto';
+            typeof pos.height === 'number'
+              ? `${pos.height}px`
+              : pos.height || 'auto';
 
           el.style.marginTop = '0px';
           el.style.marginBottom = '0px';
@@ -2872,9 +2922,9 @@ export function DragAndDrop() {
 
       const offsets = items.map(({ pos }) => {
         const top =
-        typeof pos.top === 'number' ?
-        pos.top :
-        parseFloat(String(pos.top || '0'));
+          typeof pos.top === 'number'
+            ? pos.top
+            : parseFloat(String(pos.top || '0'));
         return top - containerContentY + scrollTop;
       });
 
@@ -2887,9 +2937,9 @@ export function DragAndDrop() {
         el.style.marginTop = `${round2(candidateMargin)}px`;
 
         const left =
-        typeof pos.left === 'number' ?
-        pos.left :
-        parseFloat(String(pos.left || '0'));
+          typeof pos.left === 'number'
+            ? pos.left
+            : parseFloat(String(pos.left || '0'));
         const marginLeft = left - containerContentX + scrollLeft;
         el.style.marginLeft = `${round2(marginLeft)}px`;
 
@@ -2910,29 +2960,29 @@ export function DragAndDrop() {
         item.el.style.transition = prevTransitions[idx] || '';
       });
     },
-    [ghostElementRef, isMultiSelectKeyPressed]
+    [ghostElementRef, isMultiSelectKeyPressed],
   );
 
   //=============== get insert Position ====================
   const getInsertPosition = useCallback(
     (
-    container: HTMLElement,
-    pos: number,
-    opts: {axis?: 'y' | 'x';clientX?: number;ignore?: HTMLElement[];} = {})
-    : HTMLElement | null => {
+      container: HTMLElement,
+      pos: number,
+      opts: { axis?: 'y' | 'x'; clientX?: number; ignore?: HTMLElement[] } = {},
+    ): HTMLElement | null => {
       if (
-      !container ||
-      !(container instanceof HTMLElement) ||
-      GENERIC_CONTAINERS.includes(container.tagName.toLocaleLowerCase()))
-
-      return null;
+        !container ||
+        !(container instanceof HTMLElement) ||
+        GENERIC_CONTAINERS.includes(container.tagName.toLocaleLowerCase())
+      )
+        return null;
 
       const axis = opts.axis ?? 'y';
       const ignoreSet = new Set(opts.ignore ?? []);
       if (
-      typeof activeElementRef !== 'undefined' &&
-      activeElementRef?.current)
-      {
+        typeof activeElementRef !== 'undefined' &&
+        activeElementRef?.current
+      ) {
         ignoreSet.add(activeElementRef.current);
       }
       if (typeof ghostElementRef !== 'undefined' && ghostElementRef?.current) {
@@ -2941,8 +2991,8 @@ export function DragAndDrop() {
 
       const children = Array.from(container.children) as HTMLElement[];
       if (children.length === 0) return null;
-      const candidates: {el: HTMLElement;rect: DOMRect;midpoint: number;}[] =
-      [];
+      const candidates: { el: HTMLElement; rect: DOMRect; midpoint: number }[] =
+        [];
 
       for (const child of children) {
         if (!(child instanceof HTMLElement)) continue;
@@ -2950,10 +3000,10 @@ export function DragAndDrop() {
 
         const cs = window.getComputedStyle(child);
         if (
-        cs.display === 'none' ||
-        cs.visibility === 'hidden' ||
-        cs.opacity === '0')
-        {
+          cs.display === 'none' ||
+          cs.visibility === 'hidden' ||
+          cs.opacity === '0'
+        ) {
           continue;
         }
 
@@ -2961,9 +3011,9 @@ export function DragAndDrop() {
         if (rect.width === 0 && rect.height === 0) continue;
 
         const midpoint =
-        axis === 'y' ?
-        rect.top + rect.height / 2 :
-        rect.left + rect.width / 2;
+          axis === 'y'
+            ? rect.top + rect.height / 2
+            : rect.left + rect.width / 2;
         candidates.push({ el: child, rect, midpoint });
       }
 
@@ -2974,7 +3024,7 @@ export function DragAndDrop() {
       return null;
     },
 
-    []
+    [],
   );
 
   const dropElement = useCallback(
@@ -2985,7 +3035,7 @@ export function DragAndDrop() {
       const parent = event.target as HTMLElement;
 
       Object.values(distanceSpanRefs.current).forEach(
-        (span) => span && (span.style.display = 'none')
+        (span) => span && (span.style.display = 'none'),
       );
       hideSnapGuides();
 
@@ -3006,11 +3056,11 @@ export function DragAndDrop() {
       };
 
       if (
-      selectedElementsRef.current.length > 1 &&
-      ghostElement.classList.contains('ghost-wrapper'))
-      {
+        selectedElementsRef.current.length > 1 &&
+        ghostElement.classList.contains('ghost-wrapper')
+      ) {
         const clonedElements = Array.from(
-          ghostElement.children
+          ghostElement.children,
         ) as HTMLElement[];
         const absPositions = getAbsolutePositions(ghostElement, false);
         const parentRect = parent.getBoundingClientRect();
@@ -3031,7 +3081,7 @@ export function DragAndDrop() {
         });
 
         if (!isResizingRef.current)
-        showControlsForMultiple(selectedElementsRef.current);
+          showControlsForMultiple(selectedElementsRef.current);
         finalizeDrop();
         updateElementAttributes(parent);
         return;
@@ -3114,14 +3164,14 @@ export function DragAndDrop() {
       updateElementAttributes(activeElement);
     },
     [
-    showResizeHandles,
-    updateElementAttributes,
-    hideSnapGuides,
-    showControls,
-    arrangeAllElements,
-    hidePlaceholder,
-    showControlsForMultiple]
-
+      showResizeHandles,
+      updateElementAttributes,
+      hideSnapGuides,
+      showControls,
+      arrangeAllElements,
+      hidePlaceholder,
+      showControlsForMultiple,
+    ],
   );
 
   //===========  element dectedtor   ============
@@ -3133,7 +3183,7 @@ export function DragAndDrop() {
       if (!targetElement) return;
       showPlaceholder(targetElement, event.clientX, event.clientY);
     },
-    [showPlaceholder]
+    [showPlaceholder],
   );
 
   const addHoverEffect = (element: HTMLElement) => {
@@ -3149,17 +3199,17 @@ export function DragAndDrop() {
   // ========== detect current parent  ==============
   const detectCurrentParent = useCallback((event: globalThis.MouseEvent) => {
     if (
-    !ghostElementRef.current ||
-    !activeElementRef.current ||
-    !GENERIC_CONTAINERS)
-
-    return;
+      !ghostElementRef.current ||
+      !activeElementRef.current ||
+      !GENERIC_CONTAINERS
+    )
+      return;
     const display = getComputedStyle(activeElementRef.current).display;
     if (display === 'flex' || display === 'grid') return;
     const newContainer = event.target as HTMLElement;
     if (newContainer) {
-      activeElementPreviousContainer.current = activeElementRef.current.
-      parentElement as HTMLElement;
+      activeElementPreviousContainer.current = activeElementRef.current
+        .parentElement as HTMLElement;
       newContainer.appendChild(ghostElementRef.current);
     }
   }, []);
@@ -3204,7 +3254,7 @@ export function DragAndDrop() {
 
       return el;
     },
-    []
+    [],
   );
 
   // ======================= DROP HANDLER =============================
@@ -3244,7 +3294,7 @@ export function DragAndDrop() {
         return;
       }
     },
-    [createElementFromSpec, updateElementAttributes, hidePlaceholder]
+    [createElementFromSpec, updateElementAttributes, hidePlaceholder],
   );
 
   // ======================= DRAG EVENTS ==============================
@@ -3264,7 +3314,7 @@ export function DragAndDrop() {
       currentTargetContainerRef.current.classList.add('dragOver');
       showPlaceholder(targetElement, x, y);
     },
-    [showPlaceholder]
+    [showPlaceholder],
   );
 
   const dragLeave = useCallback(
@@ -3272,14 +3322,14 @@ export function DragAndDrop() {
       event.preventDefault();
       const targetElement = event.target as HTMLElement | null;
       if (
-      targetElement &&
-      !targetElement.contains(event.relatedTarget as Node))
-      {
+        targetElement &&
+        !targetElement.contains(event.relatedTarget as Node)
+      ) {
         targetElement.classList.remove('dragOver', 'drag-over');
         hidePlaceholder();
       }
     },
-    [hidePlaceholder]
+    [hidePlaceholder],
   );
 
   const dragEnd = useCallback(() => {
@@ -3291,13 +3341,13 @@ export function DragAndDrop() {
     const handleMouseEnter = (e: globalThis.MouseEvent) => {
       const target = e.target as HTMLElement;
       if (
-      !target ||
-      target === document.body ||
-      !target.classList ||
-      target.classList.contains('resize-handle') ||
-      target.closest('.element-control-panel') ||
-      target.closest('.ai-prompt-container'))
-      {
+        !target ||
+        target === document.body ||
+        !target.classList ||
+        target.classList.contains('resize-handle') ||
+        target.closest('.element-control-panel') ||
+        target.closest('.ai-prompt-container')
+      ) {
         return;
       }
       addHoverEffect(target);
@@ -3323,10 +3373,10 @@ export function DragAndDrop() {
     document.addEventListener('mouseover', getPositionForDrop);
     const handleClickOutside = (event: globalThis.MouseEvent) => {
       if (
-      controlsRef.current &&
-      !controlsRef.current.contains(event.target as Node) &&
-      selectedElementRef.current !== event.target)
-      {
+        controlsRef.current &&
+        !controlsRef.current.contains(event.target as Node) &&
+        selectedElementRef.current !== event.target
+      ) {
         hideControls();
       }
     };
@@ -3349,20 +3399,20 @@ export function DragAndDrop() {
       }
     };
   }, [
-  handleMove,
-  dropElement,
-  dragEnter,
-  dragOver,
-  dragLeave,
-  dragEnd,
-  handleMouseDown,
-  hideControls,
-  detectCurrentParent,
-  updateElementAttributes,
-  getInsertPosition,
-  getDropElement,
-  getPositionForDrop]
-  );
+    handleMove,
+    dropElement,
+    dragEnter,
+    dragOver,
+    dragLeave,
+    dragEnd,
+    handleMouseDown,
+    hideControls,
+    detectCurrentParent,
+    updateElementAttributes,
+    getInsertPosition,
+    getDropElement,
+    getPositionForDrop,
+  ]);
 
   useEffect(() => {
     createDistanceSpans();
@@ -3399,18 +3449,18 @@ export function DragAndDrop() {
   useEffect(() => {
     document.addEventListener('dblclick', handleElementDblClick);
     return () =>
-    document.removeEventListener('dblclick', handleElementDblClick);
+      document.removeEventListener('dblclick', handleElementDblClick);
   }, [handleElementDblClick]);
 
   const latestHandlersRef = useRef({
     handleControlClick,
-    handleAiPrompt
+    handleAiPrompt,
   });
 
   useEffect(() => {
     latestHandlersRef.current = {
       handleControlClick,
-      handleAiPrompt
+      handleAiPrompt,
     };
   }, [handleControlClick, handleAiPrompt]);
 
@@ -3483,11 +3533,11 @@ export function DragAndDrop() {
       document.removeEventListener('SELECTED_EVENT', handler as EventListener);
     };
   }, [
-  showControlsForMultiple,
-  updateElementAttributes,
-  showControls,
-  showResizeHandles]
-  );
+    showControlsForMultiple,
+    updateElementAttributes,
+    showControls,
+    showResizeHandles,
+  ]);
 
   useEffect(() => {
     const style = document.createElement('style');
@@ -3834,7 +3884,7 @@ export function DragAndDrop() {
     const handler = (event: CustomEvent) => {
       const payload = event.detail.payload;
       if (payload && selectAbleElement.current)
-      updateElementAttributes(selectAbleElement.current);
+        updateElementAttributes(selectAbleElement.current);
     };
     document.addEventListener('ELEMENT_UPDATED', handler as EventListener);
     return () => {
@@ -3852,16 +3902,15 @@ export function DragAndDrop() {
     };
     document.addEventListener(
       'DISPATCH_EMPTY_ELEMENTATTRIBUTE',
-      handler as EventListener
+      handler as EventListener,
     );
     return () => {
       document.removeEventListener(
         'DISPATCH_EMPTY_ELEMENTATTRIBUTE',
-        handler as EventListener
+        handler as EventListener,
       );
     };
   }, []);
-
 
   useEffect(() => {
     const handler = (event: CustomEvent) => {
@@ -3872,12 +3921,12 @@ export function DragAndDrop() {
     };
     document.addEventListener(
       'UPDATE_RESIZE_HANDLER',
-      handler as EventListener
+      handler as EventListener,
     );
     return () => {
       document.removeEventListener(
         'UPDATE_RESIZE_HANDLER',
-        handler as EventListener
+        handler as EventListener,
       );
     };
   }, []);
