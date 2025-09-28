@@ -53,7 +53,7 @@ const Header = () => {
 
             <div className="flex items-center space-x-3" data-path="frontend/src/components/layout/Header.tsx" data-page="frontend/src/app/page.tsx" id="el_4b239867">
 
-              <Image src={`${API_URL}/assets/default/craftapp-logo.svg`} alt="EduAdmin Logo" width={32} height={32} className="flex items-center bg-primary-600 text-white hover:bg-primary-700 px-4 py-2 rounded-md text-sm font-medium transition selected-element" onError={e => {
+              <Image src={`${API_URL}/assets/default/craftapp-logo.svg`} alt="EduAdmin Logo" width={32} height={32} className="flex items-center bg-primary-600 text-white hover:bg-primary-700 px-4 py-2 rounded-md text-sm font-medium transition selected-element" onError={(e) => {
               e.currentTarget.style.display = "none";
             }} data-path="frontend/src/components/layout/Header.tsx" data-page="frontend/src/app/page.tsx" id="el_2813205b" href="/customer/fb6fd883-5dd3-43cf-8486-7d4a91688051/register/" />
 
@@ -64,7 +64,7 @@ const Header = () => {
           </div>
 
           <nav className="hidden md:flex items-center space-x-1" data-path="frontend/src/components/layout/Header.tsx" data-page="frontend/src/app/page.tsx" id="el_7b56cb10">
-            {navigationItems.map(item => <Link key={item.name} href={item.href} className="flex items-center bg-primary-600 text-white hover:bg-primary-700 px-4 py-2 rounded-md text-sm font-medium transition selected-element" data-path="frontend/src/components/layout/Header.tsx" data-page="frontend/src/app/page.tsx">
+            {navigationItems.map((item) => <Link key={item.name} href={item.href} className="flex items-center bg-primary-600 text-white hover:bg-primary-700 px-4 py-2 rounded-md text-sm font-medium transition selected-element" data-path="frontend/src/components/layout/Header.tsx" data-page="frontend/src/app/page.tsx">
 
                 <item.icon className="mr-1" data-path="frontend/src/components/layout/Header.tsx" data-page="frontend/src/app/page.tsx" />
                 {item.name}
