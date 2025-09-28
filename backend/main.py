@@ -10,26 +10,26 @@ from database import Base, engine
 def auto_migrate():
     try:
         Base.metadata.create_all(bind=engine)
-        
+
         result = subprocess.run([
-            "alembic", "revision", "--autogenerate", 
+            "alembic", "revision", "--autogenerate",
             "-m", f"Auto migration {int(time.time())}"
         ], capture_output=True, text=True, cwd=".", timeout=60)
-        
+
         if "No changes in schema detected" in result.stdout:
             return
-        
+
         if result.returncode == 0:
             upgrade_result = subprocess.run([
                 "alembic", "upgrade", "head"
             ], capture_output=True, text=True, cwd=".", timeout=60)
-            
+
     except Exception:
         pass
 
 auto_migrate()
 
-app = FastAPI(title="Your API")
+app = FastAPI(title="EduAdmin API")
 
 app.add_middleware(
     CORSMiddleware,
